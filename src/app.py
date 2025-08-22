@@ -2,9 +2,8 @@ import streamlit as st
 import os
 import sys
 from dotenv import load_dotenv
-import io
-import PyPDF2
 
+from utils import parse_score
 from gemini_api import get_ai_response
 from extractor import extract_text_from_pdf
 
@@ -46,13 +45,16 @@ if uploaded_file is not None:
                     st.markdown(user_input)
 
                 st.info("Generating response...")
-                response = get_ai_response(extracted_text, jobDescription, user_input)
+                response = get_ai_response(extracted_text, jobDescription, user_input, st.session_state.messages)
+                print(response)
                 st.session_state.messages.append({"role" : "assistant" , "content" : response})
                 with st.chat_message("assistant"):
+                    match_score = parse_score(response)
+                    print(f"Match Score: {match_score}")
+                    if match_score > 0:
+                        st.write(f"**Match Score**")
+                        st.progress(match_score/100.0)
                     st.markdown(response)
-
-                # st.success("Response generated successfully.")
-                # st.write(response)
             else:
                 st.warning("Please enter both a job description and a query to get a response.")
     except Exception as e:

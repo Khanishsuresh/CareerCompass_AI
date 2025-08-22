@@ -1,6 +1,5 @@
 import google.generativeai as genai
 import os
-import sys
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -14,7 +13,7 @@ else:
     genai.configure(api_key=api_key)
     model = genai.GenerativeModel("gemini-1.5-flash")
 
-def get_ai_response(extracted_text , job_description , user_query):
+def get_ai_response(extracted_text , job_description , user_query, chat_history):
     """
     Generates a response from the Gemini API based on the resume and job description.
     """
@@ -33,6 +32,7 @@ def get_ai_response(extracted_text , job_description , user_query):
         2. List the top 5 skills from the resume that match the job description.
         3. Finally, answer the user's query: '{user_query}'
 
+        chat history:{chat_history}
         Your response should be in a clear, formatted way.
         """
         response = model.generate_content(prompt)

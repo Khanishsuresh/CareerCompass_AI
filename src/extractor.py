@@ -1,5 +1,4 @@
 import PyPDF2
-import io
 
 def extract_text_from_pdf(uploaded_resume):
     """
