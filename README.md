@@ -45,8 +45,8 @@ Follow these steps to set up and run the project locally.
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/khanishsuresh/careercompass_ai.git
-    cd careercompass_ai
+    git clone https://github.com/Khanishsuresh/CareerCompass_AI.git
+    cd CareerCompass_AI
     ```
 
 2.  **Create a virtual environment:**
